@@ -9,6 +9,9 @@ $lines = Get-Content -Path $sessionsToDownloadFile | Where-Object { $_.Trim() -n
 
 $headers = @{"referer" = "http://www.vmware.com"}
 
+#Remove Progress Bar and get massive download speed increase
+$ProgressPreference = 'SilentlyContinue'
+
 foreach ($line in $lines) {
     ($title,$url) = $line -split "#"
     $title = $title.replace("`:",'')
@@ -29,4 +32,5 @@ foreach ($line in $lines) {
     }
 }
 
-
+#Restore Progress Bar
+$ProgressPreference = 'Continue'
